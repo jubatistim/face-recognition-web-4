@@ -20,3 +20,6 @@ git push -u origin master
 
 $env:FLASK_APP = "app.py"
 flask run
+
+
+PRD: python -m flask run
