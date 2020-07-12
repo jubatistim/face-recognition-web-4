@@ -1,0 +1,22 @@
+virtualenv venv37 -p "C:\Users\Juliano Batistim\AppData\Local\Programs\Python\Python37\python.exe"
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+venv37/Scripts/Activate.ps1
+
+
+
+pip install -r requirements.txt
+
+
+
+echo "# face-recognition-web-4" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/jubatistim/face-recognition-web-4.git
+git push -u origin master
+
+
+
+$env:FLASK_APP = "run.py"
+flask run
