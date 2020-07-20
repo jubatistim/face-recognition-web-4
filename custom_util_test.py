@@ -10,7 +10,8 @@ from keras.models import load_model
 # get running path
 base_dir = os.path.dirname(__file__)
 
-model = load_model(os.path.join(base_dir, 'saved-models', 'cnn1589854703.h5'))
+# model = load_model(os.path.join(base_dir, 'saved-models', 'cnn1589854703.h5'))
+model = load_model(os.path.join(base_dir, 'saved-models', 'cnn1595220000.h5'))
 
 # Face reconition classifier https://github.com/opencv/opencv/tree/master/data/haarcascades
 face_cascade = cv2.CascadeClassifier(os.path.join(base_dir, 'cascades', 'haarcascade_frontalface_default.xml'))
@@ -69,19 +70,36 @@ def predict_Luna_Ju(img_return, max_wh = 700, min_size = 32, face_padding = 30):
                 test_image = image_utils.img_to_array(crop_img)
                 test_image = np.expand_dims(test_image, axis = 0)
 
-                result = model.predict_on_batch(test_image)
+                print('---------------------------------------------------------------------------')
+                print('tests start here')
+                print('---------------------------------------------------------------------------')
+
+                # result = model.predict_on_batch(test_image)
+                result = model.predict(test_image)
+
+                print(result)
+
+                # 0 - Juliano
+                # 1 - Luna
+
+                # 1,0 - Juliano
+                # 0,1 - Luna
 
                 who = ''
 
-                if result[0][0] == 0:
+                if result[0][0] > 0.5:
                     who = 'JULIANO'
                     cv2.rectangle(imgReturn, (x, y), (x+w, y+h), (255, 0, 0), 2)
-                    cv2.putText(imgReturn, who, (x, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
+                    cv2.putText(imgReturn, who + ' '  + str(result[0][0]), (x, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
                 else:
                     who = 'LUNA'
                     cv2.rectangle(imgReturn, (x, y), (x+w, y+h), (191, 0, 255), 2)
-                    cv2.putText(imgReturn, who, (x, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (191, 0, 255), 2)
+                    cv2.putText(imgReturn, who + ' ' + str(result[0][0]), (x, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (191, 0, 255), 2)
+
+                print('---------------------------------------------------------------------------')
+                print('tests end here')
+                print('---------------------------------------------------------------------------')
 
         return imgReturn
     except Exception as e:
-        print('ERROR IN AI --JULIANO E LUNA-- APPLICATION: ' + str(e))
+        print('ERROR IN AI JULIANO APPLICATION: ' + str(e))
