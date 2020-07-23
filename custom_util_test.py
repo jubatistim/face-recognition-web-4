@@ -66,7 +66,7 @@ def predict_Luna_Ju(img_return, max_wh = 700, min_size = 32, face_padding = 30, 
 
                 crop_img = cv2.resize(crop_img, (64, 64), interpolation = cv2.INTER_AREA)
 
-                test_image = image_utils.img_to_array(crop_img)
+                test_image = image_utils.img_to_array(crop_img)/255.
                 test_image = np.expand_dims(test_image, axis = 0)
 
                 result = model.predict(test_image)
