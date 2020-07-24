@@ -13,7 +13,7 @@ D:\_PRODUCTION\DEV.WORK\face-recognition-web-4\venv37\Scripts\python.exe -m pip 
 
 pip install -r requirements.txt
 
-
+###################################################################################################
 
 echo "# face-recognition-web-4" >> README.md
 git init
@@ -22,7 +22,7 @@ git commit -m "first commit"
 git remote add origin https://github.com/jubatistim/face-recognition-web-4.git
 git push -u origin master
 
-
+###################################################################################################
 
 $env:FLASK_APP = "app/app.py"
 flask run
@@ -31,35 +31,6 @@ flask run
 PRD: python -m flask run
 
 ###################################################################################################
-
-DOCKER
-
-Fat image
-If you search Google you will find examples of Dockerfiles that look like:
-
-FROM python:3.7
-COPY . /app
-WORKDIR /app
-RUN pip install -r requirements.txt
-CMD ["gunicorn", "-w 4", "main:app"]
-
-This container image weighs in at 958MB!!
-If you’re like me, then you’re scratching your head wondering “this is just a simple Python web app, why is it that big??” Let’s find a way to reduce that.
-
-Alpine
-Minimalism is important but too small can be harmful as well. You could build all containers from scratch, but that means you have to deal with low-level OS primitives like shell, cat, find, etc. That very quickly becomes tedious and distracts from getting code in front of customers as fast as possible (one of our mantras). I have found that a pragmatic balance is using a base image such as Alpine. At time of writing, the latest Alpine image (v3.10) weighs in at 5.58MB, very respectable. You also get a minimal POSIX environment with which to build your application.
-
-FROM python:3.7-alpine
-COPY . /app
-WORKDIR /app
-RUN pip install -r requirements.txt
-CMD ["gunicorn", "-w 4", "main:app"]
-
-Building this container results in an image size of 139MB. Of this, the base image is 98.7MB (at time of writing). That means that our app is responsible for the additional 40.3MB.
-It is important to note that by default Alpine uses musl instead of glibc by default. This means that some Python wheels won’t work without forcing a recompilation.
-
-
-
 
 docker build -t face-recognition-web-4:latest .
 
