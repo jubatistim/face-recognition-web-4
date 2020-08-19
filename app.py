@@ -20,7 +20,7 @@ def success():
         filestr=request.files["file"]
 
         #convert string data to numpy array
-        npimg = numpy.fromstring(filestr.read(), numpy.uint8)
+        npimg = numpy.frombuffer(filestr.read(), numpy.uint8)
 
         # convert numpy array to image
         img = cv2.imdecode(npimg, cv2.COLOR_RGB2BGR)
@@ -38,6 +38,4 @@ def success():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
-
-#remove that, just to activate a build
+    app.run(port=80)
