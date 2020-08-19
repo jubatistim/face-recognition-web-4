@@ -1,5 +1,9 @@
 py -3.7 -m venv venv37
 
+Ubuntu
+virtualenv --python=/usr/bin/python3.7 venv37
+source venv37/bin/activate
+
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 venv37/Scripts/Activate.ps1
