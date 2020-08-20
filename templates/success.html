@@ -8,8 +8,11 @@
       <div class="container">
         <p> Thanks for trying! <br>
           Your experience will be used to improve the model =)
-        </p>
-        <img src="{{ img }}" alt="predicted image"> 
+        </p>         
+        <img src="{{ img }}" alt="predicted image">
+        <form action="{{url_for('index')}}" method="GET" enctype="multipart/form-data">
+          <button type="submit"> Back </button>
+        </form> 
       </div>
     </body>
 </html>
