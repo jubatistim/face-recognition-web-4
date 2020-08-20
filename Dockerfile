@@ -1,5 +1,5 @@
-FROM python:3.7
-# FROM python:3.7-alpine
+# FROM python:3.7
+FROM python:3.7-alpine
 
 RUN apt-get update
 RUN apt-get install -y libsm6 libxext6 libxrender-dev
