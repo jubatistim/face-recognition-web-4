@@ -1,9 +1,9 @@
 # FROM python:3.7
 FROM python:3.7-alpine
 
-RUN apt-get update
-RUN apt-get install -y libsm6 libxext6 libxrender-dev
-RUN apt-get install -y libgl1-mesa-glx
+# RUN apt-get update
+# RUN apt-get install -y libsm6 libxext6 libxrender-dev
+# RUN apt-get install -y libgl1-mesa-glx
 
 COPY . /app
 WORKDIR /app
